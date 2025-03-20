@@ -2,11 +2,11 @@
 
 Who ? 
 
-I'm a data scientist. I like math and problem solving. I am too mediocre to not care anymore. 
+I'm a curious data scientist. I like math and problem solving.
 
 Why ? 
 
-In January 2025, I decided to step back from all the noise causing by AI to learn the fundamentals of computer science. I think it's essential in order to stay competitive. 
+In January 2025, I decided to step back from all the noise caused by AI to learn the fundamentals of computer science. I think it's essential in order to stay competitive. I cannot afford to stay mediocre. 
 
 I started reading thoroughly about computer architectures. In order to keep improving my understanding, I need in parallel to learn programming. So I decided to use advent of code challenges as a way to learn languages (each year one language) and programming (which means learning problem solving, data structures and algorithms). 
 
