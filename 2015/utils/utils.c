@@ -65,3 +65,32 @@ int read_file_to_array(const char *filename, char ***lines, int **count, int *li
 
 	return 0;
 }
+
+char* read_file_to_string(const char* filename) 
+{
+
+	FILE *file = fopen(filename, "r");
+	if (file == NULL)
+	{
+		printf("Error opening the file %s", filename);
+		return NULL;
+	}
+
+    fseek(file, 0, SEEK_END);
+    long size_string = ftell(file);
+    rewind(file);
+
+    char* content = (char*)malloc(size_string + 1);
+    if (content == NULL) 
+	{
+        printf("Memory allocation failed!\n");
+        fclose(file);
+        return NULL;
+    }
+
+    fread(content, 1, size_string, file);
+    content[size_string] = '\0';
+    fclose(file);
+
+    return content;
+}
