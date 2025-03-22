@@ -1,6 +1,6 @@
 // advent of code 2015
 // day 02 : i was told there would be no math
-// part 1
+// part 2
 
 #include <stdio.h>
 #include <stdlib.h>
