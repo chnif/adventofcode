@@ -3,9 +3,9 @@
 #include <string.h>
 #include "utils.h"
 
-#define INITIAL_SIZE 10
+#define INITIAL_SIZE 256
 
-int read_file_to_array(const char *filename, char ***lines, int **count, int *line_count)
+int read_file_to_array(const char *filename, char ***lines, int **count, int *lines_count)
 {
 	FILE *file = fopen(filename, "r");
 	if (file == NULL)
@@ -16,7 +16,6 @@ int read_file_to_array(const char *filename, char ***lines, int **count, int *li
 
 	*lines = malloc(INITIAL_SIZE * sizeof(char *));
 	*count = malloc(INITIAL_SIZE * sizeof(int));
-	int count_lines = 0;
 
 	if(*lines == NULL || *count == NULL)
 	{
@@ -27,9 +26,10 @@ int read_file_to_array(const char *filename, char ***lines, int **count, int *li
 
 	char *line = NULL;
 	size_t len = 0;
-	ssize_t read;
+	int index = 0;
+	int capacity = 2;
 
-	while ((read = getline(&line, &len, file)) != -1)
+	while (getline(&line, &len, file) != -1)
 	{
 
 		// skip empty lines
@@ -37,29 +37,31 @@ int read_file_to_array(const char *filename, char ***lines, int **count, int *li
             continue;
         }
 
-		if (count_lines >= INITIAL_SIZE)
+		if (index >= INITIAL_SIZE)
 		{
-			int new_size = count_lines + 10;
-			char **new_lines = realloc(*lines, new_size * sizeof(char *));
-			int *new_count = realloc(*count, new_size * sizeof(int));
+			capacity = index + 10;
+			char **new_lines = realloc(*lines, capacity * sizeof(char *));
+			int *new_count = realloc(*count, capacity * sizeof(int));
 
-			if (new_lines == NULL || new_count == NULL)
+			if (*lines == NULL || *count == NULL)
 			{
 				printf("Memory allocation failed");
-				free(*lines);
-				free(*count);
+				free(line);
+				fclose(file);
 				return -1;
 			}
+
 			*lines = new_lines;
 			*count = new_count;
 		}
 
-		(*lines)[count_lines] = line;
-		(*count)[count_lines] = strlen(line);
-
-		line = NULL;
-		len = 0;
+		(*lines)[index] = strdup(line);
+		(*count)[index] = strlen(line);
+		index++;
 	}
+
+	*lines_count = index + 1;
+	fclose(file);
 
 	return 0;
 }
