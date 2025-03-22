@@ -31,5 +31,10 @@ This README file will track my progression and also the subject and things that 
 
 # 2015
 
-- day 01 : file reading and pointers
+- day 01 : 
+    - file reading 
+    - pointers
 - day 02 : 
+    - reallocation of memory for dynamic array
+    - free() needs to be used carefully
+    - extract numbers with sscanf
