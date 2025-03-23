@@ -9,32 +9,23 @@
 
 int is_string_nice(char *line)
 {
+    int len = strlen(line);
     int count_pair = 0;
     int count_repeat = 0;
-    int counts[26] = {0};
 
-    for (int i = 0; i < strlen(line); i++)
+    for (int i = 1; i < len - 1; i++)
     {
-        printf("[DEBUG] step : [%c, %c, %c] \n", line[i], line[i+1], line[i+2]);
-        
-        if (i != strlen(line) - 2 && line[i] == line[i+2] && line[i+1] == line[i+3])
+        for (int j = 0; j < i; j++)
         {
-            count_pair++;
+            if (line[j] == line[i] && line[j+1] == line[i+1] && j + 1 != i)
+            {
+                count_pair++;
+            }
         }
-        
 
-        if (i != strlen(line) - 1 && line[i] == line[i+2])
+        if (line[i-1] == line[i+1])
         {
-            printf("[DEBUG] -> letters %c is in between [%c, %c] \n", line[i+1], line[i], line[i+1]);
             count_repeat++;
-        }
-    }
-
-    for (int i = 0; i < 26; i++)
-    {
-        if (counts[i] >= 2)
-        {
-            count_pair++;
         }
     }
 
@@ -51,7 +42,7 @@ int part1(char **lines, int lines_count)
 
     for (int i = 0; i < lines_count - 1; i++)
     {
-        if (is_string_nice(lines[i]) == 1)
+        if (is_string_nice(lines[i]))
         {
             count++;
         }
@@ -61,14 +52,12 @@ int part1(char **lines, int lines_count)
 
 int main()
 {
-
 	char **lines = NULL;
 	int lines_count = 1;
 	int *count = NULL;
 	read_file_to_array("input.txt", &lines, &count, &lines_count);
 
-	//printf("year 2015 day05 part 2 : %d \n", part1(lines, lines_count));
-    char* string = "xxyxx";
-    printf("[DEBUG] string %s is %d \n", string, is_string_nice(string));
+	printf("year 2015 day05 part 2 : %d \n", part1(lines, lines_count));
+
 	return 0;
 }
