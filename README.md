@@ -38,3 +38,12 @@ This README file will track my progression and also the subject and things that 
     - reallocation of memory for dynamic array
     - free() needs to be used carefully
     - extract numbers with sscanf
+- day 03 :
+    - create new struct, and initialize them
+    - switch case
+    - return an object from a read_file type of function
+- day04:
+    - TODO : code the md5 function that is more challenging than expected
+    - needs to learn things about memory
+- day 05 :
+    - looping through string
