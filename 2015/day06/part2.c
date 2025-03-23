@@ -1,5 +1,5 @@
 // advent of code 2015
-// day 05 : doesn't he ahve intern-elves for this ?
+// day 06 : probably a fire hazard
 // part 2
 
 #include <stdio.h>
