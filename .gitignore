@@ -2,3 +2,5 @@
 *.o
 *.out
 *.exe
+2015/dayXX/
+.vscode/

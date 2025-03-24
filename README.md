@@ -47,3 +47,6 @@ This README file will track my progression and also the subject and things that 
     - needs to learn things about memory
 - day 05 :
     - looping through string
+- day 06 :
+    - how to pass things around function : arrays, pointers, int etc
+
