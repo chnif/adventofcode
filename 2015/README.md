@@ -1,0 +1,28 @@
+# Advent of Code 2015
+
+- day 01 :
+    - file reading
+    - pointers
+- day 02 :
+    - reallocation of memory for dynamic array
+    - free() needs to be used carefully
+    - extract numbers with sscanf
+- day 03 :
+    - create new struct, and initialize them
+    - switch case
+    - return an object from a read_file type of function
+- day04:
+    - TODO : code the md5 function that is more challenging than expected
+    - needs to learn things about memory
+- day 05 :
+    - looping through string
+- day 06 :
+    - how to pass things around function : arrays, pointers, int etc
+- day 07 :
+- day 08 :
+- day 09 :
+- day 10 :
+    - learned how to loop using *x and not just over an integer
+    - **x saved the day and core dump issues, should learn more about pointer
+    - the more i learn about pointer the less i know about them
+    - you just can't initialize things how you want such a pain
