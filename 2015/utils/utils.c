@@ -31,9 +31,8 @@ int read_file_to_array(const char *filename, char ***lines, int **count, int *li
 
 	while (getline(&line, &len, file) != -1)
 	{
-
-		// skip empty lines
-		if (strlen(line) == 0) {
+		if (strlen(line) == 0)
+		{
             continue;
         }
 
@@ -55,7 +54,7 @@ int read_file_to_array(const char *filename, char ***lines, int **count, int *li
 			*count = new_count;
 		}
 
-		(*lines)[index] = strdup(line);
+		(*lines)[index] = line;
 		(*count)[index] = strlen(line);
 		index++;
 	}
@@ -66,7 +65,7 @@ int read_file_to_array(const char *filename, char ***lines, int **count, int *li
 	return 0;
 }
 
-char* read_file_to_string(const char* filename) 
+char* read_file_to_string(const char* filename)
 {
 
 	FILE *file = fopen(filename, "r");
@@ -81,7 +80,7 @@ char* read_file_to_string(const char* filename)
     rewind(file);
 
     char* content = (char*)malloc(size_string + 1);
-    if (content == NULL) 
+    if (content == NULL)
 	{
         printf("Memory allocation failed!\n");
         fclose(file);

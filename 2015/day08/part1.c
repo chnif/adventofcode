@@ -7,6 +7,78 @@
 #include <string.h>
 #include "../utils/utils.h"
 
+#define INITIAL_SIZE 256
+
+int* read_file_with_specialchar(const char* filename)
+
+
+	int count[2] = {0};
+	*lines = malloc(INITIAL_SIZE * sizeof(char *));
+	char *line = NULL;
+	size_t len = 0;
+	int index = 0;
+	int capacity = 2;
+
+
+	FILE *file = fopen(filename, "r");
+	if (file == NULL) 
+	{
+		perror("Error opening file");
+		return 1;
+	}
+
+	while ((read = getline(&line, &len, file)) != -1) {
+        // Process escape sequences in the string
+        process_escape_sequences(line);
+
+        // Print the processed line (after handling escapes)
+        printf("Processed line: %s", line);
+    }
+
+    // Clean up
+    free(line);
+    fclose(file);
+
+    return 0;
+
+    char* read_ptr = line;
+    char* write_ptr = s;
+
+    while (*read_ptr != '\0') {
+        if (*read_ptr == '\\') {
+            // Handle the escape sequence
+            switch (*(read_ptr + 1)) {
+                case '\\':
+                    *write_ptr++ = '\\';  // Handle \\ as a single backslash
+                    read_ptr += 2;        // Skip the next character
+                    break;
+                case '\"':
+                    *write_ptr++ = '\"';  // Handle \" as a quote
+                    read_ptr += 2;        // Skip the next character
+                    break;
+                case 'n':
+                    *write_ptr++ = '\n';  // Handle \n as newline
+                    read_ptr += 2;        // Skip the next character
+                    break;
+                case 't':
+                    *write_ptr++ = '\t';  // Handle \t as tab
+                    read_ptr += 2;        // Skip the next character
+                    break;
+                default:
+                    // If it's not a recognized escape sequence, just copy it as is
+                    *write_ptr++ = *read_ptr++;
+                    break;
+            }
+        } else {
+            *write_ptr++ = *read_ptr++;  // Regular character, copy it
+        }
+    }
+
+    *write_ptr = '\0';  // Null-terminate the string
+
+	return code_count;
+}
+
 int get_len_mem(const char* string) {
 	return (int)strlen(string);
 }
@@ -17,34 +89,30 @@ int get_len_code(const char* string)
 
     while (*string) 
 	{
+		printf("Current char: '%c' (ASCII: %d)\n", *string, *string);
         if (*string == '\\') 
-		{  
-            count++;
-            string++;
-
-            if (*string == '\\')
-			{
-				count++;
-				string++;		
-			}
-            else if (*string == 'x') 
-			{
-                count += 3;
-                string += 2;
-            }
-
-			else if (*string == '"') 
-			{
-				count+=2;
-				string++; 
-			}
+		{
+			count += 3;
+			string += 2;
+		}
+		else if (*string == '"') 
+		{
+			count += 3;
+			string += 2;
+		}
+		else if (*string == '\\' && *(string + 1) == 'x') 
+		{
+			printf("[DEBUG] \\x detected");
+			count += 4;
+			string += 4;
 		}
 		else
 		{
-			count++;
-			string++;
+			count += 1;
+			string += 1;
 		}
 	}
+
     return count;
 }
 
@@ -78,7 +146,7 @@ int main()
 		printf("[DEBUG] @string %15s : @char_code %d  @char_mem %d \n", lines[i], get_len_code(lines[i]), get_len_mem(lines[i]));
 	}
 
-	printf("year 2015 day08 part 1 : %d \n", solution(lines, lines_count));
+	//printf("year 2015 day08 part 1 : %d \n", solution(lines, lines_count));
 	/*
 	while(**lines)
 	{
