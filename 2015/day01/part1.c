@@ -27,7 +27,6 @@ int part1(char **line)
 
 int main()
 {
-
 	char **lines = NULL;
 	int lines_count = 1;
 	int *count = NULL;
